@@ -1,0 +1,14 @@
+.success-box {
+    text-align: center;
+    padding: 120px 24px;
+  }
+  
+  .success-box h2 {
+    font-size: 42px;
+    margin-bottom: 16px;
+  }
+  
+  .success-box p {
+    font-size: 18px;
+  }
+  

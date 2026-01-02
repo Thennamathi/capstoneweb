@@ -1,0 +1,22 @@
+.checkout-box {
+    max-width: 480px;
+    margin: 0 auto;
+    border: 1px solid #eee;
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .checkout-box p {
+    font-size: 18px;
+    margin-bottom: 32px;
+  }
+  
+  .checkout-cta {
+    padding: 14px 36px;
+    background: black;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  

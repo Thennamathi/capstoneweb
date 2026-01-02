@@ -1,0 +1,43 @@
+.pdp-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+  
+  .pdp-image {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+  }
+  
+  .pdp-image img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+  }
+  
+  .pdp-details h2 {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+  
+  .pdp-details .price {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  
+  .pdp-details button {
+    padding: 14px 32px;
+    background: black;
+    color: white;
+    border: none;
+    font-size: 16px;
+  }
+  
+
+  @media (max-width: 768px) {
+    .pdp-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+  

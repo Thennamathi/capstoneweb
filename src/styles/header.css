@@ -1,0 +1,83 @@
+.site-header {
+  height: 72px;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  background: #ffffff;
+}
+
+/* Brand */
+.header-brand a {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #000;
+}
+
+/* Center Nav */
+.header-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.header-nav a {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 16px;
+  position: relative;
+}
+
+.header-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: black;
+  transition: width 0.3s ease;
+}
+
+.header-nav a:hover::after {
+  width: 100%;
+}
+
+/* Right Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Cart Button (Primary) */
+.cart-btn {
+  padding: 8px 18px;
+  border: 1.5px solid black;
+  background: black;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Secondary Buttons */
+.secondary-btn {
+  padding: 8px 16px;
+  border: 1px solid black;
+  background: white;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 0 16px;
+    grid-template-columns: 1fr auto;
+  }
+
+  .header-nav {
+    display: none;
+  }
+}
