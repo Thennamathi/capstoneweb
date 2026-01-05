@@ -11,6 +11,11 @@ export default function Product() {
   // 🔥 PRODUCT VIEW TRACKING (HERE)
   useEffect(() => {
     if (product) {
+      window.productName = product.name;
+      window.productSku = product.id;
+      window.productPrice = product.price;
+      window.productCategory = product.category;
+
       window.dispatchEvent(new CustomEvent("productView"));
     }
   }, [product]);
