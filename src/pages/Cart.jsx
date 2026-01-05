@@ -10,9 +10,25 @@ export default function Cart() {
     setCart(storedCart);
 
     if (storedCart.length > 0) {
-      setTimeout(() => {
-        window.dispatchEvent(new CustomEvent("viewCart"));
-      }, 0);
+      const total = storedCart.reduce(
+        (sum, item) => sum + item.price * item.qty,
+        0
+      );
+
+      // 🔑 EXPOSE TO WINDOW (CRITICAL)
+      window.cartId = "CART_" + Date.now();
+      window.currency = "INR";
+      window.cartTotal = total;
+      window.productListItems = storedCart.map((item) => ({
+        SKU: item.id,
+        name: item.name,
+        quantity: item.qty,
+        priceTotal: item.price * item.qty,
+        productCategories: [{ categoryName: item.category }],
+      }));
+
+      // Fire event AFTER data is available
+      window.dispatchEvent(new CustomEvent("viewCart"));
     }
   }, []);
 
