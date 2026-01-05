@@ -8,7 +8,7 @@ export default function Cart() {
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(storedCart);
-
+    console.log(storedCart);
     if (storedCart.length > 0) {
       window.dispatchEvent(new CustomEvent("viewCart"));
     }
