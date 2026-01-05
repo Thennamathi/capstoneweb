@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/checkout.css";
+import { useEffect } from "react";
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -8,6 +9,16 @@ export default function Checkout() {
     localStorage.removeItem("cart");
     navigate("/success");
   };
+
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length > 0) {
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent("checkoutBegin"));
+      }, 0);
+    }
+  }, []);
 
   return (
     <div className="container">
