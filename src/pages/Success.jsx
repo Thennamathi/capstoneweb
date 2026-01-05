@@ -4,7 +4,7 @@ import "../styles/success.css";
 export default function Success() {
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
+    console.log(cart);
     if (cart.length > 0) {
       // Generate orderId once
       window.orderId = "ORDER_" + Date.now();
@@ -25,6 +25,7 @@ export default function Success() {
       setTimeout(() => {
         window.dispatchEvent(new CustomEvent("purchase"));
       }, 0);
+      localStorage.removeItem("cart");
     }
   }, []);
 

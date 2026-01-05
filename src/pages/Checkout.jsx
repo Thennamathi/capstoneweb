@@ -6,7 +6,7 @@ export default function Checkout() {
   const navigate = useNavigate();
 
   const placeOrder = () => {
-    localStorage.removeItem("cart");
+    // localStorage.removeItem("cart");
     navigate("/success");
   };
 
