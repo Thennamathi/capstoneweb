@@ -8,6 +8,10 @@ export default function Cart() {
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(storedCart);
+
+    if (storedCart.length > 0) {
+      window.dispatchEvent(new CustomEvent("viewCart"));
+    }
   }, []);
 
   const updateStorage = (updatedCart) => {
