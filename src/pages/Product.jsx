@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { products } from "../data/products";
 import "../styles/pdp.css";
 
@@ -6,6 +7,13 @@ export default function Product() {
   const { id } = useParams();
   const navigate = useNavigate();
   const product = products.find((p) => p.id === id);
+
+  // 🔥 PRODUCT VIEW TRACKING (HERE)
+  useEffect(() => {
+    if (product) {
+      window.dispatchEvent(new CustomEvent("productView"));
+    }
+  }, [product]);
 
   if (!product) return <p>Product not found</p>;
 
