@@ -14,9 +14,6 @@ export default function Home() {
           <Link to="/products">
             <button className="home-cta">Explore Products</button>
           </Link>
-
-          {/* Target personalization */}
-          <div id="target-home-banner"></div>
         </div>
       </div>
     </section>
