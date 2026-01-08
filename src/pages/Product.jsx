@@ -1,58 +1,35 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { products } from "../data/products";
 import "../styles/pdp.css";
 
 export default function Product() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const product = products.find((p) => p.id === id);
 
-  // 🔥 PRODUCT VIEW TRACKING (HERE)
-  // useEffect(() => {
-  //   if (product) {
-  //     window.productName = product.name;
-  //     window.productSku = product.id;
-  //     window.productPrice = product.price;
-  //     window.productCategory = product.category;
-
-  //     window.dispatchEvent(new CustomEvent("productView"));
-  //     window.adobeDataLayer.push({
-  //       event: "pageBView",
-  //       target: {
-  //         profile: {
-  //           visitedPageB: true,
-  //         },
-  //       },
-  //     });
-  //   }
-  // }, [product]);
-
   useEffect(() => {
-    if (product) {
-      // Existing analytics globals
+    if (product && window.alloy) {
+      // Analytics globals (fine to keep)
       window.productName = product.name;
       window.productSku = product.id;
       window.productPrice = product.price;
       window.productCategory = product.category;
 
-      // Existing analytics event
+      // Optional analytics event
       window.dispatchEvent(new CustomEvent("productView"));
 
-      // ✅ CORRECT: Send profile attribute to Adobe Target via Web SDK
-      if (window.alloy) {
-        window.alloy("sendEvent", {
-          xdm: {
-            eventType: "web.webPageDetails.pageViews",
-            web: {
-              webPageDetails: {
-                name: "Product Detail",
-                URL: window.location.href,
-              },
+      // ✅ ONLY page view — no Target personalization here
+      window.alloy("sendEvent", {
+        xdm: {
+          eventType: "web.webPageDetails.pageViews",
+          web: {
+            webPageDetails: {
+              name: "Product Detail",
+              URL: window.location.href,
             },
           },
-        });
-      }
+        },
+      });
     }
   }, [product]);
 
@@ -60,12 +37,7 @@ export default function Product() {
 
   const addToCart = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    cart.push({
-      ...product,
-      qty: 1,
-    });
-
+    cart.push({ ...product, qty: 1 });
     localStorage.setItem("cart", JSON.stringify(cart));
     window.dispatchEvent(new Event("cartUpdated"));
     alert("Added to cart");
@@ -83,9 +55,6 @@ export default function Product() {
         <p className="price">₹{product.price}</p>
 
         <button onClick={addToCart}>Add to Cart</button>
-
-        {/* Target offer */}
-        <div id="target-pdp-offer"></div>
       </div>
     </div>
   );

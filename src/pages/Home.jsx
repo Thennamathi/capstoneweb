@@ -4,20 +4,23 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    window.alloy("sendEvent", {
-      xdm: {
-        eventType: "web.webPageDetails.pageViews",
-        web: {
-          webPageDetails: {
-            name: "Home",
-            URL: window.location.href,
+    if (window.alloy) {
+      window.alloy("sendEvent", {
+        xdm: {
+          eventType: "web.webPageDetails.pageViews",
+          web: {
+            webPageDetails: {
+              name: "Home",
+              URL: window.location.href,
+            },
           },
         },
-      },
-      renderDecisions: true,
-      decisionScopes: ["home-hero"],
-    });
+        renderDecisions: true,
+        decisionScopes: ["home-hero"], // 👈 Target evaluates audience HERE
+      });
+    }
   }, []);
+
   return (
     <section className="home-hero" data-target-scope="home-hero">
       <div className="home-overlay"></div>
