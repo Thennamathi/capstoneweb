@@ -9,16 +9,16 @@ export default function Product() {
 
   useEffect(() => {
     if (product && window.alloy) {
-      // Analytics globals (fine to keep)
+      // Analytics globals
       window.productName = product.name;
       window.productSku = product.id;
       window.productPrice = product.price;
       window.productCategory = product.category;
 
-      // Optional analytics event
+      // Custom analytics event
       window.dispatchEvent(new CustomEvent("productView"));
 
-      // ✅ ONLY page view — no Target personalization here
+      // Page view only (no Target personalization)
       window.alloy("sendEvent", {
         xdm: {
           eventType: "web.webPageDetails.pageViews",

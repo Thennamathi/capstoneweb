@@ -16,7 +16,7 @@ export default function Home() {
           },
         },
         renderDecisions: true,
-        decisionScopes: ["home-hero"], // 👈 Target evaluates audience HERE
+        decisionScopes: ["home-hero"],
       });
     }
   }, []);
