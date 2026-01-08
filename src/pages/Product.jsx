@@ -17,6 +17,14 @@ export default function Product() {
       window.productCategory = product.category;
 
       window.dispatchEvent(new CustomEvent("productView"));
+      window.adobeDataLayer.push({
+        event: "pageBView",
+        target: {
+          profile: {
+            visitedPageB: true,
+          },
+        },
+      });
     }
   }, [product]);
 
