@@ -9,22 +9,53 @@ export default function Product() {
   const product = products.find((p) => p.id === id);
 
   // 🔥 PRODUCT VIEW TRACKING (HERE)
+  // useEffect(() => {
+  //   if (product) {
+  //     window.productName = product.name;
+  //     window.productSku = product.id;
+  //     window.productPrice = product.price;
+  //     window.productCategory = product.category;
+
+  //     window.dispatchEvent(new CustomEvent("productView"));
+  //     window.adobeDataLayer.push({
+  //       event: "pageBView",
+  //       target: {
+  //         profile: {
+  //           visitedPageB: true,
+  //         },
+  //       },
+  //     });
+  //   }
+  // }, [product]);
+
   useEffect(() => {
     if (product) {
+      // Existing analytics globals
       window.productName = product.name;
       window.productSku = product.id;
       window.productPrice = product.price;
       window.productCategory = product.category;
 
+      // Existing analytics event
       window.dispatchEvent(new CustomEvent("productView"));
-      window.adobeDataLayer.push({
-        event: "pageBView",
-        target: {
-          profile: {
-            visitedPageB: true,
+
+      // ✅ CORRECT: Send profile attribute to Adobe Target via Web SDK
+      if (window.alloy) {
+        window.alloy("sendEvent", {
+          xdm: {
+            eventType: "commerce.productViews",
           },
-        },
-      });
+          data: {
+            __adobe: {
+              target: {
+                profile: {
+                  visitedPageB: true,
+                },
+              },
+            },
+          },
+        });
+      }
     }
   }, [product]);
 
