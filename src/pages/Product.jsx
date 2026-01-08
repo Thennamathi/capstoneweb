@@ -43,14 +43,11 @@ export default function Product() {
       if (window.alloy) {
         window.alloy("sendEvent", {
           xdm: {
-            eventType: "commerce.productViews",
-          },
-          data: {
-            __adobe: {
-              target: {
-                profile: {
-                  visitedPageB: true,
-                },
+            eventType: "web.webPageDetails.pageViews",
+            web: {
+              webPageDetails: {
+                name: "Product Detail",
+                URL: window.location.href,
               },
             },
           },
