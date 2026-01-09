@@ -19,17 +19,17 @@ export default function Header() {
 
   // ✅ LOGIN — IDENTITY STITCHING ONLY
   const login = () => {
-    const crmId = "CRM1001"; // simulate CRM login
+    const crmId = "CRM1001";
 
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("customerId", crmId);
 
-    // 🔥 CRITICAL: Send CRMID to AEP for identity stitching
     if (window.alloy) {
       window.alloy("sendEvent", {
         xdm: {
+          eventType: "identity.login",
           identityMap: {
-            crmid: [
+            CRMID: [
               {
                 id: crmId,
                 primary: true,
@@ -40,7 +40,7 @@ export default function Header() {
       });
     }
 
-    alert("Logged in");
+    alert("Logged in (CRMID stitched)");
   };
 
   const logout = () => {
