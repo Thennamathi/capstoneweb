@@ -17,11 +17,29 @@ export default function Header() {
     return () => window.removeEventListener("cartUpdated", updateCartCount);
   }, []);
 
+  // ✅ LOGIN — IDENTITY STITCHING ONLY
   const login = () => {
+    const crmId = "CUST_10001"; // simulate CRM login
+
     localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("gender", "female");
-    localStorage.setItem("customerId", "CUST_10001");
-    window.dispatchEvent(new Event("userLogin"));
+    localStorage.setItem("customerId", crmId);
+
+    // 🔥 CRITICAL: Send CRMID to AEP for identity stitching
+    if (window.alloy) {
+      window.alloy("sendEvent", {
+        xdm: {
+          identityMap: {
+            crmid: [
+              {
+                id: crmId,
+                primary: true,
+              },
+            ],
+          },
+        },
+      });
+    }
+
     alert("Logged in");
   };
 
