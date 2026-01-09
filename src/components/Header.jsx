@@ -19,7 +19,7 @@ export default function Header() {
 
   // ✅ LOGIN — IDENTITY STITCHING ONLY
   const login = () => {
-    const crmId = "CUST_10001"; // simulate CRM login
+    const crmId = "CRM1001"; // simulate CRM login
 
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("customerId", crmId);
